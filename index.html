@@ -6,6 +6,96 @@
 	<script async="" src="./Infranettone_files/es-module-shims.js" crossorigin="anonymous" data-framer-es-module-shims=""></script>
 	<script>try{if(localStorage.get("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="https://framer.com/edit/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
 	<!-- Start of headStart -->
+	<script>
+	(function () {
+		var supported = { es: "es", en: "en" };
+
+		function normalize(value) {
+			if (!value) return null;
+			var lower = String(value).toLowerCase();
+			if (supported[lower]) return lower;
+			if (lower.indexOf("es") === 0) return "es";
+			if (lower.indexOf("en") === 0) return "en";
+			return null;
+		}
+
+		function getCookie(name) {
+			var encoded = encodeURIComponent(name) + "=";
+			var parts = document.cookie ? document.cookie.split(";") : [];
+			for (var i = 0; i < parts.length; i += 1) {
+				var chunk = parts[i].trim();
+				if (chunk.indexOf(encoded) === 0) {
+					return decodeURIComponent(chunk.substring(encoded.length));
+				}
+			}
+			return null;
+		}
+
+		var params = new URLSearchParams(window.location.search);
+		var fromParam = normalize(params.get("lang"));
+		var fromStorage = null;
+		try {
+			fromStorage = normalize(localStorage.getItem("lang"));
+		} catch (error) {}
+		var fromCookie = normalize(getCookie("lang"));
+		var fromNavigator = normalize((navigator.languages && navigator.languages[0]) || navigator.language || "en");
+		var lang = fromParam || fromStorage || fromCookie || fromNavigator || "en";
+
+		document.documentElement.setAttribute("lang", lang);
+		document.documentElement.setAttribute("data-lang", lang);
+		document.documentElement.setAttribute("data-lang-initialized", "1");
+		window.__APP_LANG__ = lang;
+
+		try {
+			localStorage.setItem("lang", lang);
+		} catch (error) {}
+		document.cookie = "lang=" + encodeURIComponent(lang) + "; path=/; max-age=31536000; samesite=lax";
+	})();
+	</script>
+	<style>
+	html:not([data-lang-initialized]) body {
+		visibility: hidden;
+	}
+	#app-lang-switcher {
+		position: fixed;
+		top: 14px;
+		left: 14px;
+		z-index: 2147483000;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 8px;
+		border-radius: 10px;
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(8px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+		font: 600 12px/1.2 Inter, Arial, sans-serif;
+	}
+	#app-lang-switcher button {
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		background: white;
+		color: #111;
+		border-radius: 8px;
+		padding: 5px 9px;
+		cursor: pointer;
+		font: inherit;
+	}
+	#app-lang-switcher button[aria-pressed="true"] {
+		background: #111;
+		color: #fff;
+		border-color: #111;
+	}
+	#app-lang-greeting {
+		min-width: 44px;
+		text-align: center;
+	}
+	html[data-lang="es"] .lang-en {
+		display: none;
+	}
+	html[data-lang="en"] .lang-es {
+		display: none;
+	}
+	</style>
     
     <!-- End of headStart -->
 	<meta name="viewport" content="width=device-width">
@@ -196,6 +286,11 @@
 <body>
 	<script async="" src="./Infranettone_files/script" data-fid="b5bbe58552dd1d6ecb5d52bd437f9cf5e50c791a485f9632cbbce4c3e6ea12a9" data-no-nt=""></script>
 	<!-- Start of bodyStart -->
+	<div id="app-lang-switcher" role="group" aria-label="Language selector">
+		<span id="app-lang-greeting"><span class="lang-es">Hola</span><span class="lang-en">Hello</span></span>
+		<button type="button" data-lang-option="es">ES</button>
+		<button type="button" data-lang-option="en">EN</button>
+	</div>
     
     <!-- End of bodyStart -->
 	<script data-relative-date-script="global">!function(){var c=new Map;function p(e,t,n){let r=[n,{numeric:t,style:e}],o=JSON.stringify(r),s=c.get(o);if(s)return s;let i=new Intl.RelativeTimeFormat(...r);return c.set(o,i),i}function D(e,t,n,a,r,o,s){let i=U(e,t,n),d=F(e,t,i),u=p(a,r,s).format(d,i);return o?R(u):u}function R(e){return e.charAt(0).toUpperCase()+e.slice(1)}function U(e,t,n){if(n!=="auto")return n;let a=T(e,t);if(Math.abs(a)<=7)return"day";let r=g(e,t);if(Math.abs(r)<=4)return"week";let o=v(e,t);return Math.abs(o)<=12?"month":"year"}var h=1e3,y=6e4,C=36e5,M=864e5,w=6048e5;function F(e,t,n){let a=e.getTime()-t.getTime();switch(n){case"second":return Math.trunc(a/h);case"minute":return Math.trunc(a/y);case"hour":return Math.trunc(a/C);case"day":return T(e,t);case"week":return g(e,t);case"month":return v(e,t);case"quarter":return _(e,t);case"year":return x(e,t)}let r=n}function l(e){let t=new Date(e);return t.setUTCHours(0,0,0,0),t}function T(e,t){let n=l(e).getTime(),a=l(t).getTime();return Math.round((n-a)/M)}function f(e){let t=new Date(e),n=t.getUTCDay(),a=(n<1?7:0)+n-1;return t.setUTCDate(t.getUTCDate()-a),t.setUTCHours(0,0,0,0),t}function g(e,t){let n=f(e).getTime(),a=f(t).getTime();return Math.round((n-a)/w)}function v(e,t){let n=e.getUTCFullYear()-t.getUTCFullYear(),a=e.getUTCMonth()-t.getUTCMonth();return n*12+a}function m(e){let t=e.getUTCMonth();return Math.trunc(t/3)}function _(e,t){let n=e.getUTCFullYear()-t.getUTCFullYear(),a=m(e)-m(t);return n*4+a}function x(e,t){return e.getUTCFullYear()-t.getUTCFullYear()}window.__framer_formatRelativeDate=D;
@@ -497,6 +592,87 @@ if (typeof window !== "undefined") {
 				)
 			})
 		})()
+	</script>
+	<script>
+	(function () {
+		var switcher = document.getElementById("app-lang-switcher");
+		var translatedTexts = {
+			es: {
+				"Infrastructure, baked with care.": "Infraestructura, horneada con cuidado.",
+				"Modular infrastructure, engineered with intention.": "Infraestructura modular, dise\u00f1ada con intenci\u00f3n.",
+				"Craft. Modularity.": "Artesan\u00eda. Modularidad.",
+				"Reliability. Determinism.": "Confiabilidad. Determinismo.",
+				"Simplicity. Resilience.": "Simplicidad. Resiliencia.",
+				"Infranettone continues.": "Infranettone contin\u00faa.",
+				"Still baking.": "Seguimos horneando."
+			},
+			en: {}
+		};
+
+		function setCookie(name, value) {
+			document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + "; path=/; max-age=31536000; samesite=lax";
+		}
+
+		function setLang(lang) {
+			document.documentElement.setAttribute("lang", lang);
+			document.documentElement.setAttribute("data-lang", lang);
+			window.__APP_LANG__ = lang;
+			try {
+				localStorage.setItem("lang", lang);
+			} catch (error) {}
+			setCookie("lang", lang);
+			applyTranslations(lang);
+			updateButtons(lang);
+		}
+
+		function updateButtons(lang) {
+			if (!switcher) return;
+			var buttons = switcher.querySelectorAll("button[data-lang-option]");
+			for (var i = 0; i < buttons.length; i += 1) {
+				var button = buttons[i];
+				button.setAttribute("aria-pressed", button.getAttribute("data-lang-option") === lang ? "true" : "false");
+			}
+		}
+
+		function applyTranslations(lang) {
+			var map = translatedTexts[lang] || {};
+			var textNodes = document.querySelectorAll("#main .framer-text");
+			for (var i = 0; i < textNodes.length; i += 1) {
+				var node = textNodes[i];
+				var base = node.getAttribute("data-i18n-base");
+				if (!base) {
+					base = node.textContent.trim();
+					node.setAttribute("data-i18n-base", base);
+				}
+				node.textContent = map[base] || base;
+			}
+		}
+
+		if (switcher) {
+			switcher.addEventListener("click", function (event) {
+				var target = event.target;
+				if (!target || target.tagName !== "BUTTON") return;
+				var lang = target.getAttribute("data-lang-option");
+				if (!lang) return;
+				setLang(lang);
+			});
+		}
+
+		var observerTimer = null;
+		var observer = new MutationObserver(function () {
+			if (observerTimer !== null) return;
+			observerTimer = window.requestAnimationFrame(function () {
+				observerTimer = null;
+				applyTranslations(window.__APP_LANG__ || document.documentElement.getAttribute("data-lang") || "en");
+			});
+		});
+		var mainRoot = document.getElementById("main");
+		if (mainRoot) {
+			observer.observe(mainRoot, { childList: true, subtree: true });
+		}
+
+		setLang(window.__APP_LANG__ || document.documentElement.getAttribute("data-lang") || "en");
+	})();
 	</script>
 	<!-- Start of bodyEnd -->
     
