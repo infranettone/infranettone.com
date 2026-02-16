@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- saved from url=(0660)https://framercanvas.com/s/app.dc758001a4d48a989c3d62887d26e0f8fbc4596e/canvas-sandbox-on-page.html?experiment=prototypeTreeDriver%3DdynamicOverrides#services=%7B%22api%22%3A%22https%3A%2F%2Fapi.framer.com%22%2C%22app%22%3A%22https%3A%2F%2Fframer.com%22%2C%22canvas%22%3A%22https%3A%2F%2Fframercanvas.com%22%2C%22events%22%3A%22https%3A%2F%2Fevents.framer.com%22%2C%22login%22%3A%22https%3A%2F%2Fframer.com%2Flogin%22%2C%22userContent%22%3A%22https%3A%2F%2Fframerusercontent.com%22%2C%22modulesCDN%22%3A%22https%3A%2F%2Fframerusercontent.com%2Fmodules%22%2C%22modulesShortLink%22%3A%22https%3A%2F%2Fframer.com%2Fm%22%2C%22previewDomain%22%3A%22framer.app%22%7D -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<script type="importmap-shim">
+{
+	"imports": {
+		"framer": "./scripts/framer.esm.js",
+		"framer-motion": "https://app.framerstatic.com/framer-motion-esm-shim.LT7KQIYQ.mjs",
+		"react": "./scripts/react.esm.js",
+		"react/jsx-runtime": "./scripts/react-jsx-runtime.esm.js",
+		"react/jsx-dev-runtime": "./scripts/react-jsx-runtime.esm.js",
+		"react-dom": "./scripts/react-dom.esm.js",
+		"react-dom/client": "./scripts/react-dom.esm.js",
+		"react-dom/server": "./scripts/react-dom-server.esm.js"
+	}
+}
+</script>
+
+
+		
+		
+			<script src="./react.production(1).min.js"></script>
+<script src="./react-dom.production(1).min.js"></script>
+<script src="./react-dom-server-legacy.browser.production(1).min.js"></script>
+		
+
+		
+<script>
+	window.__previousRequire__ = window.require
+	window.__previousExports__ = window.exports
+	window.__previousProcess__ = window.process
+
+	window.require = (moduleSpecifier) => {
+		switch (moduleSpecifier) {
+			case "react":
+				return window.React
+			case "object-assign":
+				return Object.assign
+			default:
+				throw new Error("react-jsx-runtime requires unexpected module:" + moduleSpecifier)
+		}
+	}
+
+	window.__REACT_RUNTIME_JSX__ = { Fragment: undefined, jsx: undefined, jsxs: undefined, jsxDEV: undefined }
+	window.exports = {
+		set Fragment(value) { window.__REACT_RUNTIME_JSX__.Fragment = value; },
+		set jsx(value) { window.__REACT_RUNTIME_JSX__.jsx = value; },
+		set jsxs(value) { window.__REACT_RUNTIME_JSX__.jsxs = value; },
+		set jsxDEV(value) {window.__REACT_RUNTIME_JSX__.jsxDEV = value; }
+	}
+</script>
+
+	<script>
+		window.process = { env: { NODE_ENV: "production" } }
+	</script>
+	<script src="./react-jsx-runtime.production.min.js"></script>
+
+<script>
+	// Restore the globals to their prev values.
+	window.require = window.__previousRequire__
+	window.exports = window.__previousExports__
+	window.process = window.__previousProcess__
+</script>
+
+		
+		<link href="./canvas-sandbox-on-page.HSVOEYER.css" rel="stylesheet">
+
+		
+		<link href="https://app.framerstatic.com/chunk-NVJNG57P.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-7GEELX35.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-CMAEAGWD.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-BM3S62FQ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-YOOGIIWU.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-HMF7T2NG.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-AHQIRSXG.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-DE6Y45DT.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-4IN3OTNJ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-LDU7O3Z2.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-4ENT6ED6.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-6C6VSETA.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-KYPY4QS7.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-FYUJQV6J.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-YDKXOXB4.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-67IDBBKJ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-JB2N3EQZ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-IZHOZLZY.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-GZI43NW3.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-J76SGVV5.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-AYYBTPZU.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-EKPHZC6W.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-BUC334RG.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-LEPWVMNB.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-REJ2XCEK.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-5CKCK72G.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-CYFZYBQN.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-POQKH4YA.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-AUNF3KWQ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-BR6A4V35.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-BKY3ZXGT.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-YQTEBD26.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-MUPUEJHJ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-TN2YRK56.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-7P43TZHS.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-Y4KSD2WZ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-75ILXMIH.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-YLTPAX4Y.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-LFMZ3QM5.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-SQM4W52F.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-SPWSWTND.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-S5DVZGHZ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-YEBNAXCQ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-IM24HCZX.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-FDX2C2EY.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-46WL6RWF.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-GM45LKCB.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-IMYWFMVZ.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-SDISSWE6.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-XFC6OVIX.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-BGDT2J4O.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-7GSEC7H4.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-EIMGQUJC.mjs" rel="modulepreload">
+<link href="https://app.framerstatic.com/chunk-WW2GMRT4.mjs" rel="modulepreload">
+	</head>
+
+	<body data-framer-theme="light">
+		<main class=""><div></div></main>
+		<script>
+	const defaultFetch = window.fetch
+	window.fetch = function(input, init) {
+		// Can be set via `installShimFetchHook` from `importShim.ts`.
+		const fetchHook = window.esmsFetchHook
+		if (fetchHook) return fetchHook(input, init, defaultFetch)
+		return defaultFetch(input, init)
+	}
+
+	// Init options for es-module-shims: https://github.com/guybedford/es-module-shims#init-options
+	window.esmsInitOptions = {
+		shimMode: true,
+		mapOverrides: true,
+		revokeBlobURLs: true,
+		resolve: function (id, parentUrl, defaultResolve) {
+			// Can be set via `installShimResolveHook` from `importShim.ts`.
+			const resolveHook = window.esmsResolveHook
+			if (resolveHook) return resolveHook(id, parentUrl, defaultResolve)
+			return defaultResolve(id, parentUrl)
+		},
+	}
+
+	// A lot of libraries assume `process.env.NODE_ENV` is present in runtime/buildtime, so we are polyfilling it
+	window.process = {
+		...window.process,
+		env: {
+			...window.process?.env,
+			NODE_ENV: "production",
+		},
+	}
+</script>
+
+		
+		<script src="./canvas-sandbox-on-page.VBA7O7NP.mjs" type="module"></script>
+
+
+<script type="importmap-shim" id="framer-local-modules">{"imports":{}}</script></body></html>
