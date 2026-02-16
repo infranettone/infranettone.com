@@ -4,7 +4,7 @@
 	
 	<script type="importmap" data-framer-importmap="">{"imports":{"__framer-badge":"https://framerusercontent.com/modules/kr6mBIQPAjMiv35rQa3A/JqQCEBMftp0u8SBv29R5/PX9hIOIVM.js","__framer-not-found-page":"https://framer.com/m/framer/SitesNotFoundPage.js@1.4.0","#framer/local/screen/augiA20Il/augiA20Il.js":"https://framerusercontent.com/modules/77rHdB4zKB5KoTQCVubM/9VexHaNAO54ZPx0e0Geu/augiA20Il.js","#framer/local/screen/zdGDflgY0/zdGDflgY0.js":"https://framerusercontent.com/modules/PJSQRwLZ87LUjkcxNaGi/KdZfj3nMI5Hwu1LNq5s3/zdGDflgY0.js","#framer/local/siteMetadata/siteMetadata/siteMetadata.js":"https://framerusercontent.com/modules/m5yXjMZwianqvilSHawV/BU93vLdOZbAQQRCRKUsC/siteMetadata.js","#framer/local/snippets/snippets/snippets.js":"https://framerusercontent.com/modules/uizihEhBcFw7nyxsvCfe/m8qgLWIzGZJ2sneHeBB5/snippets.js","#framer/local/webPageMetadata/augiA20Il/augiA20Il.js":"https://framerusercontent.com/modules/zJ3IZ3qz03jS5a0Gs6oj/5FgbAD5gP3OXIXHnef5M/augiA20Il.js","#framer/local/webPageMetadata/zdGDflgY0/zdGDflgY0.js":"https://framerusercontent.com/modules/yYkwUYWHNR1gkaN5y9aT/DfesHnc6hv1DNV6gCYQ4/zdGDflgY0.js","framer":"https://app.framerstatic.com/framer.FPZKHWW5.mjs","framer-motion":"https://app.framerstatic.com/framer-motion.IXE44LKG.mjs","react":"https://ga.jspm.io/npm:react@18.2.0/index.js","react-dom":"https://ga.jspm.io/npm:react-dom@18.2.0/index.js","react-dom/client":"https://ga.jspm.io/npm:react-dom@18.2.0/client.js","react-dom/server":"https://ga.jspm.io/npm:react-dom@18.2.0/server.browser.js","react/jsx-runtime":"https://ga.jspm.io/npm:react@18.2.0/jsx-runtime.js"},"scopes":{"https://ga.jspm.io/":{"fs":"https://framer.com/m/framer/empty.js@0.1.0","process":"https://framer.com/m/framer/empty.js@0.1.0","scheduler":"https://ga.jspm.io/npm:scheduler@0.23.0/index.js"}}}</script>
 	<script async="" src="./Infranettone_files/es-module-shims.js" crossorigin="anonymous" data-framer-es-module-shims=""></script>
-	<script>try{if(localStorage.get("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="https://framer.com/edit/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
+	<script>/* Framer editorbar preload disabled to avoid runtime repaint/flicker */</script>
 	<!-- Start of headStart -->
 	<script>
 	(function () {
@@ -44,6 +44,7 @@
 		document.documentElement.setAttribute("lang", lang);
 		document.documentElement.setAttribute("data-lang", lang);
 		document.documentElement.setAttribute("data-lang-initialized", "1");
+		document.documentElement.setAttribute("data-images-ready", "0");
 		window.__APP_LANG__ = lang;
 
 		try {
@@ -55,6 +56,15 @@
 	<style>
 	html:not([data-lang-initialized]) body {
 		visibility: hidden;
+	}
+	html[data-images-ready="0"] #main [data-framer-background-image-wrapper] {
+		opacity: 0;
+		visibility: hidden;
+	}
+	html[data-images-ready="1"] #main [data-framer-background-image-wrapper] {
+		opacity: 1;
+		visibility: visible;
+		transition: opacity 60ms linear;
 	}
 	#app-lang-switcher {
 		position: fixed;
@@ -336,44 +346,8 @@ import * as ReactDOM from "react-dom/client";
 					localeId,
 					locales,
 					preserveQueryParams: undefined,
-					siteCanonicalURL: "https://stormy-beautifully-437805.framer.app",
-					EditorBar: 
-			typeof window !== "undefined" ? (() => {
-				if (isBot) {
-					console.log("[Framer On-Page Editing] Unavailable because navigator is bot")
-					return
-				}
-
-				return Framer.lazy(async () => {
-					const dependencies = {
-						__version: 3,
-						framer: {
-							useCurrentRoute: Framer.useCurrentRoute,
-							useLocaleInfo: Framer.useLocaleInfo,
-							useRouter: Framer.useRouter,
-						},
-						react: {
-							createElement: React.createElement,
-							Fragment: React.Fragment,
-							memo: React.memo,
-							useCallback: React.useCallback,
-							useEffect: React.useEffect,
-							useRef: React.useRef,
-							useState: React.useState,
-							useLayoutEffect: React.useLayoutEffect,
-						},
-						"react-dom": { createPortal },
-					}
-
-					window.__framer_editorBarDependencies = dependencies
-
-					const { createEditorBar } = await import("https://framer.com/edit/init.mjs")
-					return {
-						default: createEditorBar(),
-					}
-				})
-			})() : undefined
-		,
+						siteCanonicalURL: "https://stormy-beautifully-437805.framer.app",
+						EditorBar: undefined,
 					adaptLayoutToTextDirection: true,
 					
 					loadSnippetsModule: new Framer.LazyValue(() => import("https://framerusercontent.com/modules/uizihEhBcFw7nyxsvCfe/m8qgLWIzGZJ2sneHeBB5/snippets.js")),
@@ -595,8 +569,67 @@ if (typeof window !== "undefined") {
 	</script>
 	<script>
 	(function () {
-		var switcher = document.getElementById("app-lang-switcher");
-		var translatedTexts = {
+		var root = document.documentElement;
+		var maxChecks = 60;
+		var checks = 0;
+
+		function revealImages() {
+			root.setAttribute("data-images-ready", "1");
+		}
+
+		function imagesLookStable() {
+			var main = document.getElementById("main");
+			if (!main) return false;
+			var framerRoot = main.querySelector("[data-framer-root]");
+			if (!framerRoot) return false;
+			var rect = framerRoot.getBoundingClientRect();
+			if (rect.width <= 0 || rect.height <= 0) return false;
+
+			var wrappers = main.querySelectorAll("[data-framer-background-image-wrapper]");
+			if (!wrappers.length) return false;
+
+			var viewportW = window.innerWidth || 1;
+			var viewportH = window.innerHeight || 1;
+
+			for (var i = 0; i < wrappers.length; i += 1) {
+				var wrapper = wrappers[i];
+				var bounds = wrapper.getBoundingClientRect();
+				var img = wrapper.querySelector("img");
+				if (!img || img.naturalWidth === 0) return false;
+				// Guard against initial full-screen sizing before Framer applies final CSS.
+				if (bounds.width >= viewportW * 0.9 && bounds.height >= viewportH * 0.9) return false;
+			}
+			return true;
+		}
+
+		function checkAndRevealImages() {
+			checks += 1;
+			if (imagesLookStable() || checks >= maxChecks) {
+				requestAnimationFrame(revealImages);
+				return;
+			}
+			requestAnimationFrame(checkAndRevealImages);
+		}
+
+		function start() {
+			requestAnimationFrame(checkAndRevealImages);
+		}
+
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", start, { once: true });
+		} else {
+			start();
+		}
+
+		// Safety fallback to avoid hidden images for too long.
+		setTimeout(revealImages, 1200);
+	})();
+	</script>
+	<script>
+		(function () {
+			var switcher = document.getElementById("app-lang-switcher");
+			var isApplyingTranslations = false;
+			var translatedTexts = {
 			es: {
 				"Infrastructure, baked with care.": "Infraestructura, horneada con cuidado.",
 				"Modular infrastructure, engineered with intention.": "Infraestructura modular, dise\u00f1ada con intenci\u00f3n.",
@@ -635,6 +668,8 @@ if (typeof window !== "undefined") {
 		}
 
 		function applyTranslations(lang) {
+			if (isApplyingTranslations) return;
+			isApplyingTranslations = true;
 			var map = translatedTexts[lang] || {};
 			var textNodes = document.querySelectorAll("#main .framer-text");
 			for (var i = 0; i < textNodes.length; i += 1) {
@@ -644,8 +679,12 @@ if (typeof window !== "undefined") {
 					base = node.textContent.trim();
 					node.setAttribute("data-i18n-base", base);
 				}
-				node.textContent = map[base] || base;
+				var nextText = map[base] || base;
+				if (node.textContent !== nextText) {
+					node.textContent = nextText;
+				}
 			}
+			isApplyingTranslations = false;
 		}
 
 		if (switcher) {
@@ -679,4 +718,4 @@ if (typeof window !== "undefined") {
     <!-- End of bodyEnd -->
 
 
-<div id="__framer-editorbar-container" dir="ltr" style="right: 10px; top: calc(-15px + 50vh); transform: translate(0px, 0px); transition: transform 100ms cubic-bezier(0.2, 0, 0, 1); cursor: pointer;"><span aria-label="Edit Framer Content" id="__framer-editorbar-label" style="right: 40px;">Edit Content</span><button type="button" aria-labelledby="__framer-editorbar-label" id="__framer-editorbar-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"><path d="M8.75 2.25a1.77 1.77 0 0 1 2.5 0h0c.69.69.69 1.81 0 2.5l-7 7h-2.5v-2.5Z" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 11.75h3.75" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round"></path></svg></button></div><iframe id="__framer-editorbar" src="./Infranettone_files/edit.html" aria-hidden="true" allow="autoplay" tabindex="-1" class="status_visually_hidden"></iframe></body><app-ls-content ng-version="17.3.7"><template shadowrootmode="open"><!----><app-similar-tools _nghost-ng-c2697620354=""><!----><!----><!----></app-similar-tools><!----><!----><style>[_nghost-ng-c2697620354]{font-family:Open Sans,sans-serif;color:#121212}</style></template></app-ls-content></html>
+</body></html>
