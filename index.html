@@ -4,8 +4,108 @@
 	
 	<script type="importmap" data-framer-importmap="">{"imports":{"__framer-badge":"https://framerusercontent.com/modules/kr6mBIQPAjMiv35rQa3A/JqQCEBMftp0u8SBv29R5/PX9hIOIVM.js","__framer-not-found-page":"https://framer.com/m/framer/SitesNotFoundPage.js@1.4.0","#framer/local/screen/augiA20Il/augiA20Il.js":"https://framerusercontent.com/modules/77rHdB4zKB5KoTQCVubM/9VexHaNAO54ZPx0e0Geu/augiA20Il.js","#framer/local/screen/zdGDflgY0/zdGDflgY0.js":"https://framerusercontent.com/modules/PJSQRwLZ87LUjkcxNaGi/KdZfj3nMI5Hwu1LNq5s3/zdGDflgY0.js","#framer/local/siteMetadata/siteMetadata/siteMetadata.js":"https://framerusercontent.com/modules/m5yXjMZwianqvilSHawV/BU93vLdOZbAQQRCRKUsC/siteMetadata.js","#framer/local/snippets/snippets/snippets.js":"https://framerusercontent.com/modules/uizihEhBcFw7nyxsvCfe/m8qgLWIzGZJ2sneHeBB5/snippets.js","#framer/local/webPageMetadata/augiA20Il/augiA20Il.js":"https://framerusercontent.com/modules/zJ3IZ3qz03jS5a0Gs6oj/5FgbAD5gP3OXIXHnef5M/augiA20Il.js","#framer/local/webPageMetadata/zdGDflgY0/zdGDflgY0.js":"https://framerusercontent.com/modules/yYkwUYWHNR1gkaN5y9aT/DfesHnc6hv1DNV6gCYQ4/zdGDflgY0.js","framer":"https://app.framerstatic.com/framer.FPZKHWW5.mjs","framer-motion":"https://app.framerstatic.com/framer-motion.IXE44LKG.mjs","react":"https://ga.jspm.io/npm:react@18.2.0/index.js","react-dom":"https://ga.jspm.io/npm:react-dom@18.2.0/index.js","react-dom/client":"https://ga.jspm.io/npm:react-dom@18.2.0/client.js","react-dom/server":"https://ga.jspm.io/npm:react-dom@18.2.0/server.browser.js","react/jsx-runtime":"https://ga.jspm.io/npm:react@18.2.0/jsx-runtime.js"},"scopes":{"https://ga.jspm.io/":{"fs":"https://framer.com/m/framer/empty.js@0.1.0","process":"https://framer.com/m/framer/empty.js@0.1.0","scheduler":"https://ga.jspm.io/npm:scheduler@0.23.0/index.js"}}}</script>
 	<script async="" src="./Infranettone_files/es-module-shims.js" crossorigin="anonymous" data-framer-es-module-shims=""></script>
-	<script>try{if(localStorage.get("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="https://framer.com/edit/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
+	<script>/* Framer editorbar preload disabled to avoid runtime repaint/flicker */</script>
 	<!-- Start of headStart -->
+	<script>
+	(function () {
+		var supported = { es: "es", en: "en" };
+
+		function normalize(value) {
+			if (!value) return null;
+			var lower = String(value).toLowerCase();
+			if (supported[lower]) return lower;
+			if (lower.indexOf("es") === 0) return "es";
+			if (lower.indexOf("en") === 0) return "en";
+			return null;
+		}
+
+		function getCookie(name) {
+			var encoded = encodeURIComponent(name) + "=";
+			var parts = document.cookie ? document.cookie.split(";") : [];
+			for (var i = 0; i < parts.length; i += 1) {
+				var chunk = parts[i].trim();
+				if (chunk.indexOf(encoded) === 0) {
+					return decodeURIComponent(chunk.substring(encoded.length));
+				}
+			}
+			return null;
+		}
+
+		var params = new URLSearchParams(window.location.search);
+		var fromParam = normalize(params.get("lang"));
+		var fromStorage = null;
+		try {
+			fromStorage = normalize(localStorage.getItem("lang"));
+		} catch (error) {}
+		var fromCookie = normalize(getCookie("lang"));
+		var fromNavigator = normalize((navigator.languages && navigator.languages[0]) || navigator.language || "en");
+		var lang = fromParam || fromStorage || fromCookie || fromNavigator || "en";
+
+		document.documentElement.setAttribute("lang", lang);
+		document.documentElement.setAttribute("data-lang", lang);
+		document.documentElement.setAttribute("data-lang-initialized", "1");
+		document.documentElement.setAttribute("data-images-ready", "0");
+		window.__APP_LANG__ = lang;
+
+		try {
+			localStorage.setItem("lang", lang);
+		} catch (error) {}
+		document.cookie = "lang=" + encodeURIComponent(lang) + "; path=/; max-age=31536000; samesite=lax";
+	})();
+	</script>
+	<style>
+	html:not([data-lang-initialized]) body {
+		visibility: hidden;
+	}
+	html[data-images-ready="0"] #main [data-framer-background-image-wrapper] {
+		opacity: 0;
+		visibility: hidden;
+	}
+	html[data-images-ready="1"] #main [data-framer-background-image-wrapper] {
+		opacity: 1;
+		visibility: visible;
+		transition: opacity 60ms linear;
+	}
+	#app-lang-switcher {
+		position: fixed;
+		top: 14px;
+		left: 14px;
+		z-index: 2147483000;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 8px;
+		border-radius: 10px;
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(8px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+		font: 600 12px/1.2 Inter, Arial, sans-serif;
+	}
+	#app-lang-switcher button {
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		background: white;
+		color: #111;
+		border-radius: 8px;
+		padding: 5px 9px;
+		cursor: pointer;
+		font: inherit;
+	}
+	#app-lang-switcher button[aria-pressed="true"] {
+		background: #111;
+		color: #fff;
+		border-color: #111;
+	}
+	#app-lang-greeting {
+		min-width: 44px;
+		text-align: center;
+	}
+	html[data-lang="es"] .lang-en {
+		display: none;
+	}
+	html[data-lang="en"] .lang-es {
+		display: none;
+	}
+	</style>
     
     <!-- End of headStart -->
 	<meta name="viewport" content="width=device-width">
@@ -196,6 +296,11 @@
 <body>
 	<script async="" src="./Infranettone_files/script" data-fid="b5bbe58552dd1d6ecb5d52bd437f9cf5e50c791a485f9632cbbce4c3e6ea12a9" data-no-nt=""></script>
 	<!-- Start of bodyStart -->
+	<div id="app-lang-switcher" role="group" aria-label="Language selector">
+		<span id="app-lang-greeting"><span class="lang-es">Hola</span><span class="lang-en">Hello</span></span>
+		<button type="button" data-lang-option="es">ES</button>
+		<button type="button" data-lang-option="en">EN</button>
+	</div>
     
     <!-- End of bodyStart -->
 	<script data-relative-date-script="global">!function(){var c=new Map;function p(e,t,n){let r=[n,{numeric:t,style:e}],o=JSON.stringify(r),s=c.get(o);if(s)return s;let i=new Intl.RelativeTimeFormat(...r);return c.set(o,i),i}function D(e,t,n,a,r,o,s){let i=U(e,t,n),d=F(e,t,i),u=p(a,r,s).format(d,i);return o?R(u):u}function R(e){return e.charAt(0).toUpperCase()+e.slice(1)}function U(e,t,n){if(n!=="auto")return n;let a=T(e,t);if(Math.abs(a)<=7)return"day";let r=g(e,t);if(Math.abs(r)<=4)return"week";let o=v(e,t);return Math.abs(o)<=12?"month":"year"}var h=1e3,y=6e4,C=36e5,M=864e5,w=6048e5;function F(e,t,n){let a=e.getTime()-t.getTime();switch(n){case"second":return Math.trunc(a/h);case"minute":return Math.trunc(a/y);case"hour":return Math.trunc(a/C);case"day":return T(e,t);case"week":return g(e,t);case"month":return v(e,t);case"quarter":return _(e,t);case"year":return x(e,t)}let r=n}function l(e){let t=new Date(e);return t.setUTCHours(0,0,0,0),t}function T(e,t){let n=l(e).getTime(),a=l(t).getTime();return Math.round((n-a)/M)}function f(e){let t=new Date(e),n=t.getUTCDay(),a=(n<1?7:0)+n-1;return t.setUTCDate(t.getUTCDate()-a),t.setUTCHours(0,0,0,0),t}function g(e,t){let n=f(e).getTime(),a=f(t).getTime();return Math.round((n-a)/w)}function v(e,t){let n=e.getUTCFullYear()-t.getUTCFullYear(),a=e.getUTCMonth()-t.getUTCMonth();return n*12+a}function m(e){let t=e.getUTCMonth();return Math.trunc(t/3)}function _(e,t){let n=e.getUTCFullYear()-t.getUTCFullYear(),a=m(e)-m(t);return n*4+a}function x(e,t){return e.getUTCFullYear()-t.getUTCFullYear()}window.__framer_formatRelativeDate=D;
@@ -241,44 +346,8 @@ import * as ReactDOM from "react-dom/client";
 					localeId,
 					locales,
 					preserveQueryParams: undefined,
-					siteCanonicalURL: "https://stormy-beautifully-437805.framer.app",
-					EditorBar: 
-			typeof window !== "undefined" ? (() => {
-				if (isBot) {
-					console.log("[Framer On-Page Editing] Unavailable because navigator is bot")
-					return
-				}
-
-				return Framer.lazy(async () => {
-					const dependencies = {
-						__version: 3,
-						framer: {
-							useCurrentRoute: Framer.useCurrentRoute,
-							useLocaleInfo: Framer.useLocaleInfo,
-							useRouter: Framer.useRouter,
-						},
-						react: {
-							createElement: React.createElement,
-							Fragment: React.Fragment,
-							memo: React.memo,
-							useCallback: React.useCallback,
-							useEffect: React.useEffect,
-							useRef: React.useRef,
-							useState: React.useState,
-							useLayoutEffect: React.useLayoutEffect,
-						},
-						"react-dom": { createPortal },
-					}
-
-					window.__framer_editorBarDependencies = dependencies
-
-					const { createEditorBar } = await import("https://framer.com/edit/init.mjs")
-					return {
-						default: createEditorBar(),
-					}
-				})
-			})() : undefined
-		,
+						siteCanonicalURL: "https://stormy-beautifully-437805.framer.app",
+						EditorBar: undefined,
 					adaptLayoutToTextDirection: true,
 					
 					loadSnippetsModule: new Framer.LazyValue(() => import("https://framerusercontent.com/modules/uizihEhBcFw7nyxsvCfe/m8qgLWIzGZJ2sneHeBB5/snippets.js")),
@@ -498,9 +567,155 @@ if (typeof window !== "undefined") {
 			})
 		})()
 	</script>
+	<script>
+	(function () {
+		var root = document.documentElement;
+		var maxChecks = 60;
+		var checks = 0;
+
+		function revealImages() {
+			root.setAttribute("data-images-ready", "1");
+		}
+
+		function imagesLookStable() {
+			var main = document.getElementById("main");
+			if (!main) return false;
+			var framerRoot = main.querySelector("[data-framer-root]");
+			if (!framerRoot) return false;
+			var rect = framerRoot.getBoundingClientRect();
+			if (rect.width <= 0 || rect.height <= 0) return false;
+
+			var wrappers = main.querySelectorAll("[data-framer-background-image-wrapper]");
+			if (!wrappers.length) return false;
+
+			var viewportW = window.innerWidth || 1;
+			var viewportH = window.innerHeight || 1;
+
+			for (var i = 0; i < wrappers.length; i += 1) {
+				var wrapper = wrappers[i];
+				var bounds = wrapper.getBoundingClientRect();
+				var img = wrapper.querySelector("img");
+				if (!img || img.naturalWidth === 0) return false;
+				// Guard against initial full-screen sizing before Framer applies final CSS.
+				if (bounds.width >= viewportW * 0.9 && bounds.height >= viewportH * 0.9) return false;
+			}
+			return true;
+		}
+
+		function checkAndRevealImages() {
+			checks += 1;
+			if (imagesLookStable() || checks >= maxChecks) {
+				requestAnimationFrame(revealImages);
+				return;
+			}
+			requestAnimationFrame(checkAndRevealImages);
+		}
+
+		function start() {
+			requestAnimationFrame(checkAndRevealImages);
+		}
+
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", start, { once: true });
+		} else {
+			start();
+		}
+
+		// Safety fallback to avoid hidden images for too long.
+		setTimeout(revealImages, 1200);
+	})();
+	</script>
+	<script>
+		(function () {
+			var switcher = document.getElementById("app-lang-switcher");
+			var isApplyingTranslations = false;
+			var translatedTexts = {
+			es: {
+				"Infrastructure, baked with care.": "Infraestructura, horneada con cuidado.",
+				"Modular infrastructure, engineered with intention.": "Infraestructura modular, dise\u00f1ada con intenci\u00f3n.",
+				"Craft. Modularity.": "Artesan\u00eda. Modularidad.",
+				"Reliability. Determinism.": "Confiabilidad. Determinismo.",
+				"Simplicity. Resilience.": "Simplicidad. Resiliencia.",
+				"Infranettone continues.": "Infranettone contin\u00faa.",
+				"Still baking.": "Seguimos horneando."
+			},
+			en: {}
+		};
+
+		function setCookie(name, value) {
+			document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + "; path=/; max-age=31536000; samesite=lax";
+		}
+
+		function setLang(lang) {
+			document.documentElement.setAttribute("lang", lang);
+			document.documentElement.setAttribute("data-lang", lang);
+			window.__APP_LANG__ = lang;
+			try {
+				localStorage.setItem("lang", lang);
+			} catch (error) {}
+			setCookie("lang", lang);
+			applyTranslations(lang);
+			updateButtons(lang);
+		}
+
+		function updateButtons(lang) {
+			if (!switcher) return;
+			var buttons = switcher.querySelectorAll("button[data-lang-option]");
+			for (var i = 0; i < buttons.length; i += 1) {
+				var button = buttons[i];
+				button.setAttribute("aria-pressed", button.getAttribute("data-lang-option") === lang ? "true" : "false");
+			}
+		}
+
+		function applyTranslations(lang) {
+			if (isApplyingTranslations) return;
+			isApplyingTranslations = true;
+			var map = translatedTexts[lang] || {};
+			var textNodes = document.querySelectorAll("#main .framer-text");
+			for (var i = 0; i < textNodes.length; i += 1) {
+				var node = textNodes[i];
+				var base = node.getAttribute("data-i18n-base");
+				if (!base) {
+					base = node.textContent.trim();
+					node.setAttribute("data-i18n-base", base);
+				}
+				var nextText = map[base] || base;
+				if (node.textContent !== nextText) {
+					node.textContent = nextText;
+				}
+			}
+			isApplyingTranslations = false;
+		}
+
+		if (switcher) {
+			switcher.addEventListener("click", function (event) {
+				var target = event.target;
+				if (!target || target.tagName !== "BUTTON") return;
+				var lang = target.getAttribute("data-lang-option");
+				if (!lang) return;
+				setLang(lang);
+			});
+		}
+
+		var observerTimer = null;
+		var observer = new MutationObserver(function () {
+			if (observerTimer !== null) return;
+			observerTimer = window.requestAnimationFrame(function () {
+				observerTimer = null;
+				applyTranslations(window.__APP_LANG__ || document.documentElement.getAttribute("data-lang") || "en");
+			});
+		});
+		var mainRoot = document.getElementById("main");
+		if (mainRoot) {
+			observer.observe(mainRoot, { childList: true, subtree: true });
+		}
+
+		setLang(window.__APP_LANG__ || document.documentElement.getAttribute("data-lang") || "en");
+	})();
+	</script>
 	<!-- Start of bodyEnd -->
     
     <!-- End of bodyEnd -->
 
 
-<div id="__framer-editorbar-container" dir="ltr" style="right: 10px; top: calc(-15px + 50vh); transform: translate(0px, 0px); transition: transform 100ms cubic-bezier(0.2, 0, 0, 1); cursor: pointer;"><span aria-label="Edit Framer Content" id="__framer-editorbar-label" style="right: 40px;">Edit Content</span><button type="button" aria-labelledby="__framer-editorbar-label" id="__framer-editorbar-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"><path d="M8.75 2.25a1.77 1.77 0 0 1 2.5 0h0c.69.69.69 1.81 0 2.5l-7 7h-2.5v-2.5Z" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 11.75h3.75" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round"></path></svg></button></div><iframe id="__framer-editorbar" src="./Infranettone_files/edit.html" aria-hidden="true" allow="autoplay" tabindex="-1" class="status_visually_hidden"></iframe></body><app-ls-content ng-version="17.3.7"><template shadowrootmode="open"><!----><app-similar-tools _nghost-ng-c2697620354=""><!----><!----><!----></app-similar-tools><!----><!----><style>[_nghost-ng-c2697620354]{font-family:Open Sans,sans-serif;color:#121212}</style></template></app-ls-content></html>
+</body></html>
